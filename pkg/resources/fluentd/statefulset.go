@@ -131,6 +131,7 @@ func (r *Reconciler) statefulsetSpec() *appsv1.StatefulSetSpec {
 					RunAsUser:      r.fluentdSpec.Security.PodSecurityContext.RunAsUser,
 					RunAsGroup:     r.fluentdSpec.Security.PodSecurityContext.RunAsGroup,
 					SeccompProfile: r.fluentdSpec.Security.PodSecurityContext.SeccompProfile,
+					SupplementalGroups: r.fluentdSpec.Security.PodSecurityContext.SupplementalGroups,
 				},
 			},
 		},

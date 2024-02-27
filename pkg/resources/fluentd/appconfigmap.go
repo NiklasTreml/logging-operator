@@ -268,6 +268,7 @@ func (r *Reconciler) newCheckPod(hashKey string, fluentdSpec v1beta1.FluentdSpec
 				RunAsUser:      fluentdSpec.Security.PodSecurityContext.RunAsUser,
 				RunAsGroup:     fluentdSpec.Security.PodSecurityContext.RunAsGroup,
 				SeccompProfile: fluentdSpec.Security.PodSecurityContext.SeccompProfile,
+				SupplementalGroups: fluentdSpec.Security.PodSecurityContext.SupplementalGroups,
 			},
 			Volumes:          volumes,
 			ImagePullSecrets: fluentdSpec.Image.ImagePullSecrets,
