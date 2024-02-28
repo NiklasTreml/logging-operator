@@ -262,18 +262,11 @@ func (r *Reconciler) newCheckPod(hashKey string, fluentdSpec v1beta1.FluentdSpec
 			Tolerations:        fluentdSpec.Tolerations,
 			Affinity:           fluentdSpec.Affinity,
 			PriorityClassName:  fluentdSpec.PodPriorityClassName,
-			SecurityContext: &corev1.PodSecurityContext{
-				RunAsNonRoot:   fluentdSpec.Security.PodSecurityContext.RunAsNonRoot,
-				FSGroup:        fluentdSpec.Security.PodSecurityContext.FSGroup,
-				RunAsUser:      fluentdSpec.Security.PodSecurityContext.RunAsUser,
-				RunAsGroup:     fluentdSpec.Security.PodSecurityContext.RunAsGroup,
-				SeccompProfile: fluentdSpec.Security.PodSecurityContext.SeccompProfile,
-				SupplementalGroups: fluentdSpec.Security.PodSecurityContext.SupplementalGroups,
-			},
-			Volumes:          volumes,
-			ImagePullSecrets: fluentdSpec.Image.ImagePullSecrets,
-			InitContainers:   initContainer,
-			Containers:       container,
+			SecurityContext:    fluentdSpec.Security.PodSecurityContext.DeepCopy(),
+			Volumes:            volumes,
+			ImagePullSecrets:   fluentdSpec.Image.ImagePullSecrets,
+			InitContainers:     initContainer,
+			Containers:         container,
 		},
 	}
 	if fluentdSpec.ConfigCheckAnnotations != nil {
